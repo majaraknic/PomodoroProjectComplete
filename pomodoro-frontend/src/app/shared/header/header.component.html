@@ -1,0 +1,10 @@
+<mat-toolbar color="primary">
+  Pomodoro application
+  <span class="toolbar-spacer"></span>
+  <a *ngIf="!isUserLoggedIn()" mat-button routerLink="/login">Login</a>
+  <a *ngIf="!isUserLoggedIn()" mat-button routerLink="/register">Register</a>
+  <a *ngIf="isUserLoggedIn()" mat-button routerLink="/dashboard">Dashboard</a>
+  <a *ngIf="isUserLoggedIn()" mat-button routerLink="/history">History</a>
+  <a *ngIf="isUserLoggedIn()" mat-button routerLink="/login" (click)="onLogoutClick()">Logout</a>
+
+</mat-toolbar>

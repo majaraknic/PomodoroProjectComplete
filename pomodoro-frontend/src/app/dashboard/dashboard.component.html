@@ -1,0 +1,87 @@
+<div class="team-content" *ngIf="noCurrentTeam">
+  <mat-card>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <b>
+          <p>You are not a member of any team. Please create your own team, or wait for someone to invite you:</p>
+        </b>
+        <mat-form-field class="full-width-input">
+          <input matInput placeholder="Name" formControlName="name" required>
+          <mat-error *ngIf="isFieldInvalid('name')">{{getErrorMessage('name')}}</mat-error>
+        </mat-form-field>
+
+        <mat-error>
+          {{backendErrorMessage}}
+        </mat-error>
+        <button mat-raised-button color="primary" [disabled]="!this.form.valid">Create</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div class="team-content" *ngIf="!noCurrentTeam" fxLayout="row" fxLayoutAlign="space-around center">
+  <b>
+    <h2>You are currently part of {{team.name}} team</h2>
+  </b>
+</div>
+<div class="team-content" *ngIf="!noCurrentTeam">
+
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <div>
+      <mat-card class="users-mat-card">
+        <mat-card-content>
+          <b>
+            <p>Team members:</p>
+          </b>
+          <mat-divider></mat-divider>
+          <mat-selection-list #list>
+            <mat-list-option *ngFor="let user of team.users" [value]="user.email" (click)="setSelectedTeamMember(user)">
+              {{user.email}}
+            </mat-list-option>
+          </mat-selection-list>
+          <mat-divider></mat-divider>
+          <div fxLayout="row" fxLayoutAlign="end end">
+            <button mat-mini-fab aria-label="Add" (click)="onClickAdd()" class="add-btn">
+              <mat-icon>add</mat-icon>
+            </button>
+            <button class="exit-btn" mat-mini-fab aria-label="Add" (click)="onClickExit()">
+              <mat-icon>exit_to_app</mat-icon>
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div>
+      <mat-card *ngIf="selectedTeamMember" class="activity-mat-card">
+        <mat-card-content>
+          <b>
+            <p *ngIf="selectedTeamMember.pomodoro.status === 'STOPPED'">Activity:</p>
+            <p *ngIf="selectedTeamMember.pomodoro.status === 'ACTIVE_TASK'">Activity: Task</p>
+            <p *ngIf="selectedTeamMember.pomodoro.status === 'ACTIVE_PAUSE'">Activity: Pause</p>
+          </b>
+          <mat-divider></mat-divider>
+          <div *ngIf="!(selectedTeamMember.pomodoro.status === 'STOPPED')">
+            <countdown #counter (reached)="onTimerCounted($event)" units="Minutes | Seconds" end={{pomodoroEndDate}}>
+            </countdown>
+          </div>
+          <div *ngIf="selectedTeamMember.pomodoro.status === 'STOPPED'">
+            <p class="no-task-msg">User doesn't have any task at the moment.</p>
+          </div>
+          <mat-divider></mat-divider>
+          <div
+            *ngIf="selectedTeamMember.pomodoro.status === 'STOPPED' && selectedTeamMember.email === currentUser.email">
+            <button class="btn-start" mat-mini-fab aria-label="Play" (click)=startPomodoro()>
+              <mat-icon>play_arrow</mat-icon>
+            </button>
+          </div>
+          <div
+            *ngIf="selectedTeamMember.pomodoro.status === 'ACTIVE_TASK' && selectedTeamMember.email === currentUser.email"
+            (click)=stopPomodoro()>
+            <button class="btn-stop" mat-mini-fab aria-label="Stop">
+              <mat-icon>stop</mat-icon>
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>

@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Add team member</h1>
+<div mat-dialog-content>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <mat-form-field class="full-width-input">
+        <input matInput placeholder="Email" formControlName="email" required>
+        <mat-error *ngIf="isFieldInvalid('email')">{{getErrorMessage('email')}}</mat-error>
+      </mat-form-field>
+      <button [disabled]="!this.form.valid" mat-icon-button aria-label="Example icon-button with a heart icon">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+    <mat-error>
+      {{backendErrorMessage}}
+    </mat-error>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button [disabled]="!team" mat-raised-button color="primary" [mat-dialog-close]="team">Add</button>
+</div>

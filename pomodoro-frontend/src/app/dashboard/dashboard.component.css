@@ -1,0 +1,119 @@
+mat-card {
+  max-width: 400px;
+  margin: 2em auto;
+  text-align: center;
+}
+
+.signin-content {
+  padding: 60px 1rem;
+}
+
+.full-width-input {
+  width: 100%;
+}
+
+::ng-deep.mat-pseudo-checkbox {
+  display: none !important;
+}
+
+
+.container {
+  color: #FFF;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timer-container {
+  font-size: 200px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  line-height: 1;
+
+  display: flex;
+  /* border: 1px solid red; */
+}
+
+.minutes,
+.middle,
+.seconds {
+  padding: 15px;
+  /* border: 1px solid green; */
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-black {
+  width: 3em;
+  height: 3em;
+  background: #000;
+  color: #FFF;
+  margin: 5px;
+  border-radius: 10px;
+  font-size: 1em;
+}
+
+.message {
+  font-size: 1.5em;
+}
+
+
+.exit-btn {
+  margin-left: 5px;
+  margin-top: 15px;
+}
+
+.add-btn {
+  margin-top: 15px;
+}
+
+::ng-deep.countdown {
+  width: 100%;
+  height: 100px;
+  background: white;
+}
+
+::ng-deep.two-dots {
+  display: none;
+}
+
+::ng-deep.measurements {
+  color: black;
+  margin-right: 5px;
+  padding: 10px;
+}
+
+.users-mat-card {
+  width: 180px;
+  max-width: 180px;
+}
+
+.activity-mat-card {
+  width: 180px;
+  max-width: 180px;
+  margin-left: 20px;
+}
+
+::ng-deep.divider {
+  font-size: 30px;
+}
+
+.bottom-divider {
+  margin-top: 7px;
+}
+
+.no-task-msg {
+  margin-top: 30px;
+}
+
+.btn-start {
+  margin-top: 15px;
+}
+
+.btn-stop {
+  margin-top: 15px;
+}

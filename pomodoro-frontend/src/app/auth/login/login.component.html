@@ -1,0 +1,25 @@
+<div class="signin-content">
+  <mat-card>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <b>
+          <p>Please login to continue</p>
+        </b>
+        <mat-form-field class="full-width-input">
+          <input matInput placeholder="Email" formControlName="email" required>
+          <mat-error *ngIf="isFieldInvalid('email')">{{getErrorMessage('email')}}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+          <input matInput type="password" placeholder="Password" formControlName="password" required>
+          <mat-error *ngIf="isFieldInvalid('password')">
+            {{getErrorMessage('password')}}
+          </mat-error>
+        </mat-form-field>
+        <mat-error>
+          {{backendErrorMessage}}
+        </mat-error>
+        <button mat-raised-button color="primary" [disabled]="!this.form.valid">Login</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
